@@ -20,15 +20,19 @@ const courseSchema = new mongoose.Schema({
   __v: Number
 });
 
-// creat model
+// creat a model
 const Course = mongoose.model("Course", courseSchema);
 
-// get the documents
+// get courses
 async function getCourses() {
-  const course = await Course.find()
+  return await Course.find({ isPublished: true, tags: { $in: ["backend"] } })
     .sort({ name: 1 })
     .select({ name: 1, author: 1 });
-  console.log(course);
+}
+// display courses
+async function run() {
+  const courses = await getCourses();
+  console.log(courses);
 }
 
-getCourses();
+run();
