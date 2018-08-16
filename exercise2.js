@@ -29,8 +29,8 @@ async function getCourses() {
     isPublished: true,
     tags: { $in: ["backend", "frontend"] }
   })
-    .sort({ price: -1 })
-    .select({ name: 1, author: 1 });
+    .sort("-price")
+    .select("name author price");
 }
 // display courses
 async function run() {
